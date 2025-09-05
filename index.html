@@ -2,25 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login + Flex Message</title>
+<title>Login + Flex JSON</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-
 body { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#1f293a; }
-
 .container { position:relative; width:256px; height:256px; display:flex; justify-content:center; align-items:center; }
-
 .container span { position:absolute; left:0; width:32px; height:6px; background:#2c4766; border-radius:8px;
     transform-origin:128px; transform: scale(2.2) rotate(calc(var(--i)*(360deg/50)));
-    animation: animateBlink 3s linear infinite; animation-delay:calc(var(--i)*(3s/50));
-}
-
+    animation: animateBlink 3s linear infinite; animation-delay:calc(var(--i)*(3s/50)); }
 @keyframes animateBlink { 0% {background:#0ef;} 25% {background:#2c4766;} }
-
 .login-box { position:absolute; width:400px; background:#1f293a; padding:40px; border-radius:16px; box-shadow:0 0 20px #0ef; }
 .login-box form { width:100%; }
 h2 { font-size:2em; color:#0ef; text-align:center; margin-bottom:20px; }
@@ -30,9 +22,7 @@ h2 { font-size:2em; color:#0ef; text-align:center; margin-bottom:20px; }
 .input-box input:focus, .input-box input:valid { border-color:#0ef; }
 .input-box label { position:absolute; top:50%; left:20px; transform:translateY(-50%); font-size:1em; color:#fff; pointer-events:none; transition:.5s ease; }
 .input-box input:focus~label, .input-box input:valid~label { top:1px; font-size:.8em; background:#1f293a; padding:0 6px; color:#0ef; }
-
 .btn { width:100%; height:45px; background:#0ef; border:none; border-radius:40px; cursor:pointer; font-size:1em; color:#1f293a; font-weight:600; margin-top:10px; }
-
 #jsonOutput { display:none; margin-top:20px; background:#2c3e50; color:#fff; padding:10px; border-radius:8px; max-height:300px; overflow:auto; }
 #jsonOutput pre { white-space: pre-wrap; word-break: break-word; }
 #jsonOutput button { margin-top:10px; background:#0ef; border:none; color:#1f293a; padding:6px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
@@ -55,6 +45,7 @@ h2 { font-size:2em; color:#0ef; text-align:center; margin-bottom:20px; }
             <button type="button" class="btn" onclick="checkLogin()">Login</button>
         </form>
 
+        <!-- JSON Output -->
         <div id="jsonOutput">
             <pre id="jsonContent"></pre>
             <button onclick="openLine()">เปิด LINE</button>
@@ -119,8 +110,8 @@ function checkLogin() {
     const code1 = document.getElementById("code1").value;
     const code2 = document.getElementById("code2").value;
 
+    // ตัวอย่างรหัส
     if(code1 === "1234" && code2 === "5678") {
-        // JSON ตัวอย่าง
         const jsonMessage = {
           "type": "bubble",
           "size": "mega",
@@ -139,7 +130,6 @@ function checkLogin() {
             ]
           }
         };
-
         document.getElementById("jsonContent").textContent = JSON.stringify(jsonMessage, null, 2);
         document.getElementById("jsonOutput").style.display = "block";
     } else {
