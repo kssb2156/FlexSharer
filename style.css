@@ -33,10 +33,10 @@ body {
     height: 6px;
     background: #2c4766;
     border-radius: 8px;
-    transform-origin: 0 -150px; /* หมุนรอบรัศมี 150px */
-    transform: translate(-50%, -50%) rotate(calc(var(--i) * 7.2deg));
+    transform-origin: -128px 0;
+    transform: rotate(calc(var(--i) * (360deg / 50)));
     animation: animateBlink 3s linear infinite;
-    animation-delay: calc(var(--i) * 0.06s);
+    animation-delay: calc(var(--i) * (3s / 50));
     z-index: 0;
 }
 
@@ -143,12 +143,17 @@ body {
 
 #jsonOutput button {
     margin-top:10px;
-    margin-right:10px;
-    padding:8px 16px;
+    background:#0ef;
     border:none;
+    color:#1f293a;
+    padding:8px 14px;
     border-radius:8px;
     cursor:pointer;
-    font-weight:bold;
-    background:#0ef;
-    color:#1f293a;
+    font-weight:600;
+    margin-right:10px;
+}
+
+/* ซ่อน Login */
+.hidden {
+    display:none !important;
 }
