@@ -1,33 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #1f293a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:#1f293a;
 }
 
 .container {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
+    position:relative;
+    width:100%;
+    max-width:400px;
+    padding:20px;
 }
 
+/* วงแหวน */
+.container span {
+    position:absolute;
+    left:0;
+    width:32px;
+    height:6px;
+    background:#2c4766;
+    border-radius:8px;
+    transform-origin:128px;
+    transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+    animation: animateBlink 3s linear infinite;
+    animation-delay: calc(var(--i) * (3s / 50));
+}
+
+@keyframes animateBlink {
+    0% {background:#0ef;}
+    25% {background:#2c4766;}
+}
+
+/* หยุดวงแหวน */
+.container span.stop {
+    animation-play-state: paused;
+}
+
+/* Login Box */
 .login-box {
     background:#1f293a;
     padding:40px;
     border-radius:16px;
     box-shadow:0 0 20px #0ef;
     transition:0.5s;
+    z-index:1;
+    position:relative;
 }
 
 .login-box h2 {
@@ -102,6 +129,7 @@ body {
     border-radius:12px;
     max-height:400px;
     overflow:auto;
+    margin-top:20px;
 }
 
 #jsonOutput pre {
