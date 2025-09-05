@@ -76,7 +76,7 @@ function checkLogin() {
     const code1 = document.getElementById("code1").value;
     const code2 = document.getElementById("code2").value;
 
-    if(code1 === "1234" && code2 === "5678") { // ตั้งรหัสถูกต้อง
+    if(code1 === "Admin" && code2 === "0000") { // ตั้งรหัสถูกต้อง
         // ซ่อน Login
         document.getElementById("loginBox").style.display = "none";
         // แสดง JSON
@@ -89,15 +89,205 @@ function checkLogin() {
             "backgroundColor": "#2c3e50",
             "paddingAll": "16px",
             "contents": [
+             {
+  "type": "bubble",
+  "size": "mega",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "backgroundColor": "#2c3e50",
+    "paddingAll": "16px",
+    "contents": [
+      {
+        "type": "text",
+        "text": "รายการเงินเข้า",
+        "weight": "bold",
+        "size": "md",
+        "align": "start",
+        "color": "#ffffff"
+      },
+      {
+        "type": "text",
+        "text": "หมายเลข: xxx-xxx979-3",
+        "weight": "bold",
+        "size": "xs",
+        "align": "start",
+        "margin": "none",
+        "color": "#A9A9A9"
+      },
+      {
+        "type": "text",
+        "text": "ชื่อ: เกรียงศักดิ์ xx",
+        "color": "#A9A9A9",
+        "margin": "none",
+        "size": "xs"
+      },
+      {
+        "type": "text",
+        "text": "5 ก.ย. 68 18:11",
+        "color": "#A9A9A9",
+        "margin": "none",
+        "size": "xxs"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "backgroundColor": "#2c3e50",
+        "paddingAll": "16px",
+        "contents": [
+          {
+            "type": "text",
+            "text": "จำนวนเงิน",
+            "weight": "bold",
+            "size": "md",
+            "align": "start",
+            "color": "#ffffff",
+            "margin": "none"
+          },
+          {
+            "type": "text",
+            "text": "2,000.00 บาท",
+            "weight": "bold",
+            "size": "xxl",
+            "align": "center",
+            "margin": "md",
+            "color": "#f1c40f"
+          }
+        ],
+        "spacing": "none"
+      }
+    ]
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "paddingAll": "16px",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "flex": 1,
+            "contents": [
               {
                 "type": "text",
-                "text": "เข้าสู่ระบบสำเร็จ!",
-                "color": "#ffffff",
-                "weight": "bold"
+                "text": "ยอดค้างคงเหลือ",
+                "size": "sm",
+                "weight": "bold",
+                "color": "#555555",
+                "margin": "none"
+              },
+              {
+                "type": "text",
+                "text": "30,400.00",
+                "size": "lg",
+                "weight": "bold",
+                "color": "#FF0000",
+                "margin": "md"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "flex": 1,
+            "contents": [
+              {
+                "type": "text",
+                "text": "ยอดชำระแล้ว",
+                "size": "sm",
+                "weight": "bold",
+                "color": "#555555",
+                "align": "end"
+              },
+              {
+                "type": "text",
+                "text": "36,000.00",
+                "size": "lg",
+                "weight": "bold",
+                "color": "#1DB446",
+                "margin": "md",
+                "align": "end"
               }
             ]
           }
-        };
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "text",
+        "text": "ความคืบหน้าการชำระ",
+        "margin": "md",
+        "weight": "bold",
+        "color": "#333333"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "backgroundColor": "#eeeeee",
+            "height": "10px",
+            "cornerRadius": "5px",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "backgroundColor": "#1DB446",
+                "width": "50%",
+                "height": "10px",
+                "cornerRadius": "5px",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": " ",
+                    "size": "xxs",
+                    "color": "#eeeeee"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "ยอดเงินการยืมทั้งหมด: 66,400.00 บาท",
+        "size": "sm",
+        "color": "#aaaaaa",
+        "wrap": true,
+        "margin": "md"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "color": "#2980b9",
+        "action": {
+          "type": "uri",
+          "label": "ดูรายละเอียดทั้งหมด",
+          "uri": "https://dif.link/yreo0242"
+        }
+      }
+    ],
+    "spacing": "none",
+    "margin": "none"
+  }
+};
         document.getElementById("jsonContent").textContent = JSON.stringify(jsonMessage, null, 2);
         document.getElementById("jsonOutput").style.display = "block";
         document.getElementById("jsonButtons").style.display = "block"; // แสดงปุ่ม
