@@ -6,10 +6,14 @@
 <title>Login + Flex JSON</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
 body { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#1f293a; }
+
 .container { position:relative; width:400px; }
 .container span { display:none; } /* ซ่อนวงแหวนเพื่อไม่รกตา */
+
 .login-box { background:#1f293a; padding:40px; border-radius:16px; box-shadow:0 0 20px #0ef; transition:0.5s; }
 .login-box h2 { font-size:2em; color:#0ef; text-align:center; margin-bottom:20px; }
 .input-box { position:relative; margin:20px 0; }
@@ -17,11 +21,25 @@ body { display:flex; justify-content:center; align-items:center; min-height:100v
 .input-box input:focus, .input-box input:valid { border-color:#0ef; }
 .input-box label { position:absolute; top:50%; left:20px; transform:translateY(-50%); font-size:1em; color:#fff; pointer-events:none; transition:.5s ease; }
 .input-box input:focus~label, .input-box input:valid~label { top:1px; font-size:.8em; background:#1f293a; padding:0 6px; color:#0ef; }
+
 .btn { width:100%; height:45px; background:#0ef; border:none; border-radius:40px; cursor:pointer; font-size:1em; color:#1f293a; font-weight:600; margin-top:10px; }
 
+/* JSON Box */
 #jsonOutput { display:none; margin-top:20px; background:#2c3e50; color:#fff; padding:20px; border-radius:12px; max-height:400px; overflow:auto; }
 #jsonOutput pre { white-space: pre-wrap; word-break: break-word; }
-#jsonOutput button { margin-top:10px; background:#0ef; border:none; color:#1f293a; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:600; margin-right:10px; }
+
+/* ปุ่มแยกออกมา */
+.json-buttons { text-align:center; margin-top:15px; display:none; }
+.json-buttons button {
+    background:#0ef;
+    border:none;
+    color:#1f293a;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    margin-right:10px;
+}
 </style>
 </head>
 <body>
@@ -44,6 +62,10 @@ body { display:flex; justify-content:center; align-items:center; min-height:100v
     <!-- JSON Output -->
     <div id="jsonOutput">
         <pre id="jsonContent"></pre>
+    </div>
+
+    <!-- ปุ่มแยกออกมา -->
+    <div class="json-buttons" id="jsonButtons">
         <button onclick="copyJSON()">Copy JSON</button>
         <button onclick="openLine()">เปิด LINE</button>
     </div>
@@ -78,6 +100,7 @@ function checkLogin() {
         };
         document.getElementById("jsonContent").textContent = JSON.stringify(jsonMessage, null, 2);
         document.getElementById("jsonOutput").style.display = "block";
+        document.getElementById("jsonButtons").style.display = "block"; // แสดงปุ่ม
     } else {
         alert("รหัสไม่ถูกต้อง!");
     }
