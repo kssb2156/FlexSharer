@@ -1,119 +1,159 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #1f293a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:#1f293a;
 }
 
 .container {
     position: relative;
-    width: 256px;
-    height: 256px;
+    width: 400px;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* วงแหวน */
 .container span {
     position: absolute;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 32px;
     height: 6px;
     background: #2c4766;
     border-radius: 8px;
-    transform-origin: 128px;
-    transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+    transform-origin: -128px 0;
+    transform: rotate(calc(var(--i) * (360deg / 50)));
     animation: animateBlink 3s linear infinite;
     animation-delay: calc(var(--i) * (3s / 50));
+    z-index: 0;
 }
 
 @keyframes animateBlink {
-    0% {
-        background: #0ef;
-    }
-    25% {
-        background: #2c4766;
-    }
+    0% { background:#0ef; }
+    25% { background:#2c4766; }
 }
 
+/* หยุดวงแหวน */
+.container span.stop {
+    animation-play-state: paused;
+}
+
+/* Login Box */
 .login-box {
-    position: absolute;
-    width: 400px;
+    background:#1f293a;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 0 20px #0ef;
+    z-index:1;
+    position:relative;
 }
 
-.login-box form {
-    width: 100%;
-    padding: 0 50px;
-}
-
-h2 {
-    font-size: 2em;
-    color: #0ef;
-    text-align: center;
+.login-box h2 {
+    font-size:2em;
+    color:#0ef;
+    text-align:center;
+    margin-bottom:20px;
 }
 
 .input-box {
-    position: relative;
-    margin: 25px 0;
+    position:relative;
+    margin:20px 0;
 }
 
 .input-box input {
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: 2px solid #2c4766;
-    outline: none;
-    border-radius: 40px;
-    font-size: 1em;
-    color: #fff;
-    padding: 0 20px;
-    transition: .5s ease;
+    width:100%;
+    height:50px;
+    background:transparent;
+    border:2px solid #2c4766;
+    outline:none;
+    border-radius:40px;
+    font-size:1em;
+    color:#fff;
+    padding:0 20px;
+    transition:.5s ease;
 }
 
 .input-box input:focus,
 .input-box input:valid {
-    border-color: #0ef;
+    border-color:#0ef;
 }
 
 .input-box label {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: #fff;
-    pointer-events: none;
-    transition: .5s ease;
+    position:absolute;
+    top:50%;
+    left:20px;
+    transform:translateY(-50%);
+    font-size:1em;
+    color:#fff;
+    pointer-events:none;
+    transition:.5s ease;
 }
 
 .input-box input:focus~label,
 .input-box input:valid~label {
-    top: 1px;
-    font-size: .8em;
-    background: #1f293a;
-    padding: 0 6px;
-    color: #0ef;
+    top:1px;
+    font-size:.8em;
+    background:#1f293a;
+    padding:0 6px;
+    color:#0ef;
 }
 
 .btn {
-    width: 100%;
-    height: 45px;
-    background: #0ef;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    cursor: pointer;
-    font-size: 1em;
-    color: #1f293a;
-    font-weight: 600;
+    width:100%;
+    height:45px;
+    background:#0ef;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    font-size:1em;
+    color:#1f293a;
+    font-weight:600;
+    margin-top:10px;
+}
+
+/* JSON Output */
+#jsonOutput {
+    display:none;
+    background:#2c3e50;
+    color:#fff;
+    padding:20px;
+    border-radius:12px;
+    max-height:400px;
+    overflow:auto;
+    margin-top:20px;
+    z-index:2;
+}
+
+#jsonOutput pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+#jsonOutput button {
+    margin-top:10px;
+    background:#0ef;
+    border:none;
+    color:#1f293a;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    margin-right:10px;
+}
+
+/* ซ่อน Login */
+.hidden {
+    display:none !important;
 }
