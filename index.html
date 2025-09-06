@@ -3,38 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login + Flex JSON</title>
+<title>Login + Flex JSON with Image</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#1f293a; }
-.container { position:relative; width:400px; }
-.login-box { background:#1f293a; padding:40px; border-radius:16px; box-shadow:0 0 20px #0ef; transition:0.5s; }
-.login-box h2 { font-size:2em; color:#0ef; text-align:center; margin-bottom:20px; }
-.input-box { position:relative; margin:20px 0; }
-.input-box input { width:100%; height:50px; background:transparent; border:2px solid #2c4766; outline:none; border-radius:40px; font-size:1em; color:#fff; padding:0 20px; transition:.5s ease; }
-.input-box input:focus, .input-box input:valid { border-color:#0ef; }
-.input-box label { position:absolute; top:50%; left:20px; transform:translateY(-50%); font-size:1em; color:#fff; pointer-events:none; transition:.5s ease; }
-.input-box input:focus~label, .input-box input:valid~label { top:1px; font-size:.8em; background:#1f293a; padding:0 6px; color:#0ef; }
-.btn { width:100%; height:45px; background:#0ef; border:none; border-radius:40px; cursor:pointer; font-size:1em; color:#1f293a; font-weight:600; margin-top:10px; }
 
-#jsonOutput { display:none; margin-top:10px; background:#2c3e50; color:#fff; padding:20px; border-radius:12px; max-height:400px; overflow:auto; }
-#jsonOutput pre { white-space: pre-wrap; word-break: break-word; }
+body { 
+    display:flex; 
+    justify-content:center; 
+    align-items:center; 
+    min-height:100vh; 
+    background:#1f293a; 
+}
+
+.container { 
+    position:relative; 
+    width:800px; 
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:20px; 
+}
+
+.login-box { 
+    background:#1f293a; 
+    padding:40px; 
+    border-radius:16px; 
+    box-shadow:0 0 20px #0ef; 
+    transition:0.5s; 
+    width:400px;
+}
+
+.login-box h2 { 
+    font-size:2em; 
+    color:#0ef; 
+    text-align:center; 
+    margin-bottom:20px; 
+}
+
+.input-box { 
+    position:relative; 
+    margin:20px 0; 
+}
+
+.input-box input { 
+    width:100%; 
+    height:50px; 
+    background:transparent; 
+    border:2px solid #2c4766; 
+    outline:none; 
+    border-radius:40px; 
+    font-size:1em; 
+    color:#fff; 
+    padding:0 20px; 
+    transition:.5s ease; 
+}
+
+.input-box input:focus, .input-box input:valid { 
+    border-color:#0ef; 
+}
+
+.input-box label { 
+    position:absolute; 
+    top:50%; 
+    left:20px; 
+    transform:translateY(-50%); 
+    font-size:1em; 
+    color:#fff; 
+    pointer-events:none; 
+    transition:.5s ease; 
+}
+
+.input-box input:focus~label, .input-box input:valid~label { 
+    top:1px; 
+    font-size:.8em; 
+    background:#1f293a; 
+    padding:0 6px; 
+    color:#0ef; 
+}
+
+.btn { 
+    width:100%; 
+    height:45px; 
+    background:#0ef; 
+    border:none; 
+    border-radius:40px; 
+    cursor:pointer; 
+    font-size:1em; 
+    color:#1f293a; 
+    font-weight:600; 
+    margin-top:10px; 
+}
+
+#jsonOutput { 
+    display:none; 
+    background:#2c3e50; 
+    color:#fff; 
+    padding:20px; 
+    border-radius:12px; 
+    max-height:400px; 
+    overflow:auto; 
+    width:400px;
+}
+
+#jsonOutput pre { 
+    white-space: pre-wrap; 
+    word-break: break-word; 
+}
 
 .action-buttons { 
-  display:none; 
-  margin-bottom:10px; 
-  text-align:center;   /* ปุ่มอยู่ตรงกลาง */
+    display:none; 
+    margin-bottom:10px; 
+    text-align:center;   
 }
+
 .action-buttons button { 
-  background:#0ef; 
-  border:none; 
-  color:#1f293a; 
-  padding:10px 16px; 
-  border-radius:8px; 
-  cursor:pointer; 
-  font-weight:600; 
-  margin:5px; 
+    background:#0ef; 
+    border:none; 
+    color:#1f293a; 
+    padding:10px 16px; 
+    border-radius:8px; 
+    cursor:pointer; 
+    font-weight:600; 
+    margin:5px; 
+}
+
+.image-box { 
+    display:none; 
+    width:auto; 
+    max-height:420px; /* ให้สูงพอดีกับ JSON Box */
+}
+
+.image-box img { 
+    width:auto; 
+    height:100%; 
+    border-radius:0;  /* ไม่มีมุมโค้ง */
+    box-shadow:none;  /* ไม่มี shadow */
 }
 </style>
 </head>
@@ -55,15 +159,20 @@ body { display:flex; justify-content:center; align-items:center; min-height:100v
         <button class="btn" onclick="checkLogin()">Login</button>
     </div>
 
-    <!-- ปุ่มอยู่นอกกล่อง JSON (ตรงกลาง) -->
-    <div class="action-buttons" id="actionButtons">
-        <button onclick="copyJSON()">Copy JSON</button>
-        <button onclick="openLine()">เปิด LINE</button>
+    <!-- JSON Output + Action Buttons -->
+    <div>
+        <div class="action-buttons" id="actionButtons">
+            <button onclick="copyJSON()">Copy JSON</button>
+            <button onclick="openLine()">เปิด LINE</button>
+        </div>
+        <div id="jsonOutput">
+            <pre id="jsonContent"></pre>
+        </div>
     </div>
 
-    <!-- JSON Output -->
-    <div id="jsonOutput">
-        <pre id="jsonContent"></pre>
+    <!-- Image Box -->
+    <div class="image-box" id="imageBox">
+        <img src="https://s.imgz.io/2025/09/06/b67e0d36e82b6e9969f8fd25b3346296-removebg-preview90b1ec1a530572f3.png" alt="Side Image">
     </div>
 </div>
 
@@ -75,208 +184,29 @@ function checkLogin() {
     if(code1 === "1234" && code2 === "5678") { 
         document.getElementById("loginBox").style.display = "none";
         const jsonMessage = {
-  "type": "bubble",
-  "size": "mega",
-  "header": {
-    "type": "box",
-    "layout": "vertical",
-    "backgroundColor": "#2c3e50",
-    "paddingAll": "16px",
-    "contents": [
-      {
-        "type": "text",
-        "text": "รายการเงินเข้า",
-        "weight": "bold",
-        "size": "md",
-        "align": "start",
-        "color": "#ffffff"
-      },
-      {
-        "type": "text",
-        "text": "หมายเลข: xxx-xxx979-3",
-        "weight": "bold",
-        "size": "xs",
-        "align": "start",
-        "margin": "none",
-        "color": "#A9A9A9"
-      },
-      {
-        "type": "text",
-        "text": "ชื่อ: เกรียงศักดิ์ xx",
-        "color": "#A9A9A9",
-        "margin": "none",
-        "size": "xs"
-      },
-      {
-        "type": "text",
-        "text": "5 ก.ย. 68 18:11",
-        "color": "#A9A9A9",
-        "margin": "none",
-        "size": "xxs"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "backgroundColor": "#2c3e50",
-        "paddingAll": "16px",
-        "contents": [
-          {
-            "type": "text",
-            "text": "จำนวนเงิน",
-            "weight": "bold",
-            "size": "md",
-            "align": "start",
-            "color": "#ffffff",
-            "margin": "none"
-          },
-          {
-            "type": "text",
-            "text": "2,000.00 บาท",
-            "weight": "bold",
-            "size": "xxl",
-            "align": "center",
-            "margin": "md",
-            "color": "#f1c40f"
-          }
-        ],
-        "spacing": "none"
-      }
-    ]
-  },
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "paddingAll": "16px",
-    "contents": [
-      {
-        "type": "box",
-        "layout": "horizontal",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "vertical",
-            "flex": 1,
-            "contents": [
-              {
-                "type": "text",
-                "text": "ยอดคงเหลือ",
-                "size": "sm",
-                "weight": "bold",
-                "color": "#555555",
-                "margin": "none"
-              },
-              {
-                "type": "text",
-                "text": "30,400.00",
-                "size": "lg",
-                "weight": "bold",
-                "color": "#FF0000",
-                "margin": "md"
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "flex": 1,
-            "contents": [
-              {
-                "type": "text",
-                "text": "ยอดชำระแล้ว",
-                "size": "sm",
-                "weight": "bold",
-                "color": "#555555",
-                "align": "end"
-              },
-              {
-                "type": "text",
-                "text": "36,000.00",
-                "size": "lg",
-                "weight": "bold",
-                "color": "#1DB446",
-                "margin": "md",
-                "align": "end"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "separator",
-        "margin": "lg"
-      },
-      {
-        "type": "text",
-        "text": "ความคืบหน้าการชำระ",
-        "margin": "md",
-        "weight": "bold",
-        "color": "#333333"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "margin": "sm",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "backgroundColor": "#eeeeee",
-            "height": "10px",
-            "cornerRadius": "5px",
-            "contents": [
-              {
+            "type": "bubble",
+            "size": "mega",
+            "header": {
                 "type": "box",
                 "layout": "vertical",
-                "backgroundColor": "#1DB446",
-                "width": "50%",
-                "height": "10px",
-                "cornerRadius": "5px",
+                "backgroundColor": "#2c3e50",
+                "paddingAll": "16px",
                 "contents": [
-                  {
-                    "type": "text",
-                    "text": " ",
-                    "size": "xxs",
-                    "color": "#eeeeee"
-                  }
+                    {
+                        "type": "text",
+                        "text": "รายการเงินเข้า",
+                        "weight": "bold",
+                        "size": "md",
+                        "align": "start",
+                        "color": "#ffffff"
+                    }
                 ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "text": "ยอดเงินการยืมทั้งหมด: 66,400.00 บาท",
-        "size": "sm",
-        "color": "#aaaaaa",
-        "wrap": true,
-        "margin": "md"
-      }
-    ]
-  },
-  "footer": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "button",
-        "style": "primary",
-        "color": "#2980b9",
-        "action": {
-          "type": "uri",
-          "label": "ดูรายละเอียดทั้งหมด",
-          "uri": "https://dif.link/yreo0242"
-        }
-      }
-    ],
-    "spacing": "none",
-    "margin": "none"
-  }
-}
- ;
+            }
+        };
         document.getElementById("jsonContent").textContent = JSON.stringify(jsonMessage, null, 2);
         document.getElementById("jsonOutput").style.display = "block";
-        document.getElementById("actionButtons").style.display = "block"; // แสดงปุ่มตรงกลางด้านบน
+        document.getElementById("actionButtons").style.display = "block"; 
+        document.getElementById("imageBox").style.display = "block"; // แสดงรูปภาพ
     } else {
         alert("รหัสไม่ถูกต้อง!");
     }
